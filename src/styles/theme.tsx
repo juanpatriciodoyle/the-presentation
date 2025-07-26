@@ -7,6 +7,7 @@ export interface Theme {
         cardBorder: string;
         cardShadow: string;
     };
+    blur?: string;
 }
 
 export const lightTheme: Theme = {
@@ -33,11 +34,12 @@ export const darkTheme: Theme = {
 
 export const liquidGlassTheme: Theme = {
     colors: {
-        background: '#E0E5EC',
-        text: '#333333',
-        accent: '#0059B2',
-        secondaryBg: 'rgba(255, 255, 255, 0.4)',
-        cardBorder: 'rgba(255, 255, 255, 0.8)',
-        cardShadow: '7px 7px 15px rgba(0, 0, 0, 0.1), -7px -7px 15px rgba(255, 255, 255, 0.9)',
+        background: '#F8F5F2',
+        text: '#4A4A4A',
+        accent: '#4A90E2',
+        secondaryBg: 'rgba(255, 255, 255, 0.6)',
+        cardBorder: 'rgba(255, 255, 255, 0.3)',
+        cardShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.1)',
     },
+    blur: '8px',
 };

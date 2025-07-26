@@ -1,11 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
-import { Theme } from './theme';
 
-type GlobalStyleProps = {
-    theme: Theme;
-};
-
-export const GlobalStyle = createGlobalStyle<GlobalStyleProps>`
+export const GlobalStyle = createGlobalStyle`
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
     *,
