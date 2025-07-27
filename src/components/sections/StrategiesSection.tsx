@@ -32,7 +32,6 @@ const StrategySelectorCard = styled(Card)<{ $isActive: boolean }>`
 `;
 
 const ContentDisplay = styled(Card)`
-    min-height: 400px;
     position: relative;
 `;
 
@@ -144,7 +143,7 @@ const StrategiesSection: React.FC = () => {
                                 <p dangerouslySetInnerHTML={{__html: content.trinity}}/>
                             </div>
                             <div>
-                                <h4>Examples in the Wild</h4>
+                                <h4>Examples</h4>
                                 {content.examples.map((ex) => (
                                     <ExampleCard key={ex.name}>
                                         <AppsTitle $isVisible={isContentVisible}>{ex.name}</AppsTitle>

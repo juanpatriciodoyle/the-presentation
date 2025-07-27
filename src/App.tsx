@@ -15,10 +15,6 @@ const MainContainer = styled.main`
     max-width: 72rem;
     margin: 0 auto;
     padding: 0 2rem;
-
-    @media (max-width: 640px) {
-        padding: 0 1rem;
-    }
 `;
 
 const themes = {
