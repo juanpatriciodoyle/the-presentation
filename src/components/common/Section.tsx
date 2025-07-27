@@ -6,7 +6,7 @@ const SectionWrapper = styled.section<{ $isVisible: boolean }>`
     padding: 5rem 0;
     opacity: 0;
     transform: translateY(30px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    transition: opacity 0.6s ease-out, transform 1s ease-out;
 
     ${(props) =>
             props.$isVisible &&
