@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Cog, Wrench, Smartphone } from 'lucide-react';
+import {Cog, ComponentIcon, FullscreenIcon} from 'lucide-react';
 import Section from '../common/Section';
-import { Card } from '../common/Card';
-import { HeaderContainer, Title, Description } from '../common/Header';
+import {Card} from '../common/Card';
+import {Description, HeaderContainer, Title} from '../common/Header';
 
 const Grid = styled.div`
     display: grid;
@@ -31,7 +31,7 @@ const PathTitle = styled.h3`
 `;
 
 const PathDescription = styled.p`
-    color: #6b7280;
+    color: ${(props) => props.theme.colors.description};
     line-height: 1.6;
 `;
 
@@ -44,19 +44,22 @@ const ImplementationSection: React.FC = () => {
             </HeaderContainer>
             <Grid>
                 <PathCard>
-                    <IconWrapper><Cog size={40} strokeWidth={1.5} /></IconWrapper>
+                    <IconWrapper><Cog size={40} strokeWidth={1.5}/></IconWrapper>
                     <PathTitle>TX (Services Focus)</PathTitle>
-                    <PathDescription>Leverage backend services and APIs. Avoid custom front-end work in TX, focusing on configuration and service integration (e.g., DAM).</PathDescription>
+                    <PathDescription>Leverage backend services and APIs. Avoid custom front-end work in TX, focusing on
+                        configuration and service integration (e.g., DAM).</PathDescription>
                 </PathCard>
                 <PathCard>
-                    <IconWrapper><Wrench size={40} strokeWidth={1.5} /></IconWrapper>
-                    <PathTitle>DX (Digital Experience)</PathTitle>
-                    <PathDescription>Empower developers by improving tools with external assets, like pre-built React components.</PathDescription>
+                    <IconWrapper><FullscreenIcon size={40} strokeWidth={1.5}/></IconWrapper>
+                    <PathTitle>DX (Components)</PathTitle>
+                    <PathDescription>Empower developers by improving tools with external assets, like pre-built React
+                        components.</PathDescription>
                 </PathCard>
                 <PathCard>
-                    <IconWrapper><Smartphone size={40} strokeWidth={1.5} /></IconWrapper>
-                    <PathTitle>MX (Multi Experience)</PathTitle>
-                    <PathDescription>Simplify design universally. Create a library of good, reusable, common flows for our apps (e.g., Profile, Onboarding).</PathDescription>
+                    <IconWrapper><ComponentIcon size={40} strokeWidth={1.5}/></IconWrapper>
+                    <PathTitle>MX (Components)</PathTitle>
+                    <PathDescription>Simplify design universally. Create a library of good, reusable, common flows for
+                        our apps (e.g., Profile, Onboarding).</PathDescription>
                 </PathCard>
             </Grid>
         </Section>

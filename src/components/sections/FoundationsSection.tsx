@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Circle } from 'lucide-react';
+import {Circle} from 'lucide-react';
 import Section from '../common/Section';
-import { Card } from '../common/Card';
-import { HeaderContainer, Title, Description } from '../common/Header';
+import {Card} from '../common/Card';
+import {Description, HeaderContainer, Title} from '../common/Header';
 
 const Quote = styled(Description)`
     font-style: italic;
@@ -29,7 +29,7 @@ const PillarTitle = styled.h3`
 `;
 
 const PillarDescription = styled.p`
-    color: #6b7280;
+    color: ${(props) => props.theme.colors.description};
     margin-bottom: 1rem;
 `;
 
@@ -51,7 +51,7 @@ const PillarListItem = styled.li`
     svg {
         flex-shrink: 0;
         color: ${(props) => props.theme.colors.accent};
-        margin-top: 0.25rem;
+        margin-top: 0.4rem;
     }
 `;
 
@@ -61,42 +61,45 @@ const FoundationsSection: React.FC = () => {
             <HeaderContainer>
                 <Title>The Two Pillars of Great Design</Title>
                 <Quote>
-                    What defines a good UI now-a-days? A good UI is no longer just about aesthetics; it's a blend of seamless functionality and sophisticated design that anticipates user needs.
+                    What defines a good UI now-a-days? A good UI is no longer just about aesthetics; it's a blend of
+                    seamless functionality and sophisticated design that anticipates user needs.
                 </Quote>
             </HeaderContainer>
             <Grid>
                 <Card>
                     <PillarTitle>Pillar 1: Timeless Elegance</PillarTitle>
-                    <PillarDescription>Enduring rules of simplicity and clarity that form the bedrock of good design.</PillarDescription>
+                    <PillarDescription>Enduring rules of simplicity and clarity that form the bedrock of good
+                        design.</PillarDescription>
                     <PillarList>
                         <PillarListItem>
-                            <Circle size={12} strokeWidth={3} />
+                            <Circle size={12} strokeWidth={3}/>
                             <span><strong>Elegant Simplicity (KISS):</strong> Eliminate irrelevant information to reduce cognitive load.</span>
                         </PillarListItem>
                         <PillarListItem>
-                            <Circle size={12} strokeWidth={3} />
+                            <Circle size={12} strokeWidth={3}/>
                             <span><strong>Mastery of White Space:</strong> Use negative space to create focus and guide the user.</span>
                         </PillarListItem>
                         <PillarListItem>
-                            <Circle size={12} strokeWidth={3} />
+                            <Circle size={12} strokeWidth={3}/>
                             <span><strong>Strict & Muted Visuals:</strong> A limited color palette and strong typography create a clean, professional interface.</span>
                         </PillarListItem>
                     </PillarList>
                 </Card>
                 <Card>
                     <PillarTitle>Pillar 2: The Modern Standard</PillarTitle>
-                    <PillarDescription>Essential practices that address the complexities of today's multi-device world.</PillarDescription>
+                    <PillarDescription>Essential practices that address the complexities of today's multi-device
+                        world.</PillarDescription>
                     <PillarList>
                         <PillarListItem>
-                            <Circle size={12} strokeWidth={3} />
+                            <Circle size={12} strokeWidth={3}/>
                             <span><strong>Accessibility by Default:</strong> Design for everyone. Meeting WCAG AA is the minimum.</span>
                         </PillarListItem>
                         <PillarListItem>
-                            <Circle size={12} strokeWidth={3} />
+                            <Circle size={12} strokeWidth={3}/>
                             <span><strong>Responsive & Mobile-First:</strong> Layouts must adapt seamlessly to any screen size.</span>
                         </PillarListItem>
                         <PillarListItem>
-                            <Circle size={12} strokeWidth={3} />
+                            <Circle size={12} strokeWidth={3}/>
                             <span><strong>Clear Visual Hierarchy:</strong> Intentionally guide the user's eye to the most important elements.</span>
                         </PillarListItem>
                     </PillarList>

@@ -6,15 +6,15 @@ export const HeaderContainer = styled.div`
 `;
 
 export const Title = styled.h2`
-  font-size: 2.25rem;
-  font-weight: 800;
-  letter-spacing: -0.02em;
+    font-size: 2.25rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
 `;
 
 export const Description = styled.p`
   margin-top: 1rem;
   font-size: 1.125rem;
-  color: #6b7280;
+  color: ${(props) => props.theme.colors.description};
   max-width: 48rem;
   margin-left: auto;
   margin-right: auto;

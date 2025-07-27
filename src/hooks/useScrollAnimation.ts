@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import {useEffect, useRef, useState} from 'react';
 
 export const useScrollAnimation = <T extends HTMLElement>() => {
     const [isVisible, setIsVisible] = useState(false);
@@ -22,5 +22,5 @@ export const useScrollAnimation = <T extends HTMLElement>() => {
         return () => window.removeEventListener('scroll', scrollHandler);
     }, []);
 
-    return { ref, isVisible };
+    return {ref, isVisible};
 };

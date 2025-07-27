@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import Section from '../common/Section';
-import { Card } from '../common/Card';
+import {Card} from '../common/Card';
 import Tag from '../common/Tag';
-import { HeaderContainer, Title, Description } from '../common/Header';
+import {Description, HeaderContainer, Title} from '../common/Header';
 
 const StepsContainer = styled(Card)`
     max-width: 48rem;
@@ -42,7 +42,7 @@ const StepTitle = styled.h3`
 `;
 
 const StepDescription = styled.p`
-    color: #6b7280;
+    color: ${(props) => props.theme.colors.description};
 `;
 
 const TagContainer = styled.div`
@@ -60,29 +60,32 @@ const ActionableStepsSection: React.FC = () => {
                 <StepsList>
                     <StepItem>
                         <StepContent>
-                            <StepTitle>Be a Design Setter / Filter</StepTitle>
-                            <StepDescription>Establish and enforce new design standards to ensure quality and consistency.</StepDescription>
+                            <StepTitle>Flip-UP our apps</StepTitle>
+                            <StepDescription>Showcase how our apps can be visually and functionally improved from a
+                                design perspective.</StepDescription>
                         </StepContent>
                         <TagContainer>
-                            <Tag effort="Medium" />
+                            <Tag effort="Low"/>
                         </TagContainer>
                     </StepItem>
                     <StepItem>
                         <StepContent>
-                            <StepTitle>Flip-UP our apps</StepTitle>
-                            <StepDescription>Showcase how our apps can be visually and functionally improved from a design perspective.</StepDescription>
+                            <StepTitle>Be a Design Setter / Filter</StepTitle>
+                            <StepDescription>Establish and enforce new design standards to ensure quality and
+                                consistency.</StepDescription>
                         </StepContent>
                         <TagContainer>
-                            <Tag effort="Low" />
+                            <Tag effort="Medium"/>
                         </TagContainer>
                     </StepItem>
                     <StepItem>
                         <StepContent>
                             <StepTitle>Provide Visual Prototypes</StepTitle>
-                            <StepDescription>Create tangible, high-fidelity prototypes to establish a clear visual standard.</StepDescription>
+                            <StepDescription>Create tangible, high-fidelity prototypes to establish a clear visual
+                                standard.</StepDescription>
                         </StepContent>
                         <TagContainer>
-                            <Tag effort="High" />
+                            <Tag effort="High"/>
                         </TagContainer>
                     </StepItem>
                 </StepsList>

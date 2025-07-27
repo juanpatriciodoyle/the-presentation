@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
 import Section from '../common/Section';
-import { Card } from '../common/Card';
-import { strategyData, Strategy } from '../../data/strategyData';
-import { HeaderContainer, Title, Description } from '../common/Header';
+import {Card} from '../common/Card';
+import {Strategy, strategyData} from '../../data/strategyData';
+import {Description, HeaderContainer, Title} from '../common/Header';
 
 const StrategyGrid = styled.div`
     display: grid;
@@ -36,6 +36,19 @@ const ContentDisplay = styled(Card)`
     position: relative;
 `;
 
+const AppsTitle = styled.div<{ $isVisible: boolean }>`
+    transition: opacity 0.4s ease-in-out;
+    opacity: ${(props) => (props.$isVisible ? 1 : 0)};
+    color: ${(props) => props.theme.colors.secondaryText};
+    font-weight: bold;
+`
+
+const AppDescription = styled.div<{ $isVisible: boolean }>`
+    transition: opacity 0.4s ease-in-out;
+    opacity: ${(props) => (props.$isVisible ? 1 : 0)};
+    color: ${(props) => props.theme.colors.secondaryText};
+`
+
 const ContentInner = styled.div<{ $isVisible: boolean }>`
     transition: opacity 0.4s ease-in-out;
     opacity: ${(props) => (props.$isVisible ? 1 : 0)};
@@ -53,7 +66,7 @@ const ContentInner = styled.div<{ $isVisible: boolean }>`
     }
 
     p {
-        color: #4a4a4a;
+        color: ${(props) => props.theme.colors.description};
         line-height: 1.6;
     }
 
@@ -71,9 +84,9 @@ const ExampleCard = styled.div`
     p:first-child {
         font-weight: 600;
     }
+
     p:last-child {
         font-size: 0.875rem;
-        color: #6b7280;
     }
 `;
 
@@ -95,7 +108,8 @@ const StrategiesSection: React.FC = () => {
         <Section id="strategies">
             <HeaderContainer>
                 <Title>Our Two Strategic Directions</Title>
-                <Description>Based on our principles, we can pursue two distinct and powerful UI strategies. Click to explore each approach.</Description>
+                <Description>Based on our principles, we can pursue two distinct and powerful UI strategies. Click to
+                    explore each approach.</Description>
             </HeaderContainer>
             <StrategyGrid>
                 <SelectorContainer>
@@ -127,14 +141,14 @@ const StrategiesSection: React.FC = () => {
                             </div>
                             <div>
                                 <h4>The Holy Trinity of Visuals</h4>
-                                <p dangerouslySetInnerHTML={{ __html: content.trinity }} />
+                                <p dangerouslySetInnerHTML={{__html: content.trinity}}/>
                             </div>
                             <div>
                                 <h4>Examples in the Wild</h4>
                                 {content.examples.map((ex) => (
                                     <ExampleCard key={ex.name}>
-                                        <p>{ex.name}</p>
-                                        <p>{ex.desc}</p>
+                                        <AppsTitle $isVisible={isContentVisible}>{ex.name}</AppsTitle>
+                                        <AppDescription $isVisible={isContentVisible}>{ex.desc}</AppDescription>
                                     </ExampleCard>
                                 ))}
                             </div>
