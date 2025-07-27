@@ -20,11 +20,11 @@ const MainContainer = styled.main`
 const themes = {
     light: lightTheme,
     dark: darkTheme,
-    liquid: liquidGlassTheme,
+    glass: liquidGlassTheme,
 };
 
 function App() {
-    const [themeKey, setThemeKey] = useState('light');
+    const [themeKey, setThemeKey] = useState('glass');
 
     const handleThemeChange = (key: string) => {
         setThemeKey(key);
