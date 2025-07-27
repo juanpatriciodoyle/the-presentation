@@ -39,7 +39,7 @@ const ImplementationSection: React.FC = () => {
     return (
         <Section id="implementation">
             <HeaderContainer>
-                <Title>The Path Forward: Three Roads</Title>
+                <Title>The Path Forward</Title>
                 <Description>How we can apply these concepts across our platforms.</Description>
             </HeaderContainer>
             <Grid>
