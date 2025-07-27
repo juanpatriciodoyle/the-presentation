@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 
 const SelectorWrapper = styled.div`
@@ -10,14 +10,25 @@ const SelectorWrapper = styled.div`
     border-radius: 9999px;
     padding: 0.5rem;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    display: flex;
+    display: inline-flex;
+    align-items: center;
     gap: 0.5rem;
     border: 1px solid ${(props) => props.theme.colors.cardBorder};
 
     ${(props) => props.theme.blur && `
-    -webkit-backdrop-filter: blur(${props.theme.blur});
-    backdrop-filter: blur(${props.theme.blur});
-  `}
+        -webkit-backdrop-filter: blur(${props.theme.blur});
+        backdrop-filter: blur(${props.theme.blur});
+    `}
+`;
+
+const ActiveIndicator = styled.div`
+    position: absolute;
+    top: 0.5rem;
+    bottom: 0.5rem;
+    border-radius: 9999px;
+    background-color: ${(props) => props.theme.colors.accent};
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), width 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    z-index: 1;
 `;
 
 const ThemeButton = styled.button<{ $isActive: boolean }>`
@@ -27,17 +38,13 @@ const ThemeButton = styled.button<{ $isActive: boolean }>`
     border-radius: 9999px;
     font-weight: 600;
     font-family: 'Inter', sans-serif;
-    transition: background-color 0.2s ease, color 0.2s ease;
-
-    background-color: ${(props) =>
-            props.$isActive ? props.theme.colors.accent : 'transparent'};
+    transition: color 0.2s ease;
+    background-color: transparent;
+    position: relative;
+    z-index: 2;
 
     color: ${(props) =>
-            props.$isActive ? '#FFFFFF' : props.theme.colors.text};
-
-    &:hover {
-        background-color: ${(props) => !props.$isActive && 'rgba(0, 0, 0, 0.05)'};
-    }
+    props.$isActive ? '#FFFFFF' : props.theme.colors.text};
 `;
 
 const themeOptions = [
@@ -52,11 +59,29 @@ interface ThemeSelectorProps {
 }
 
 const ThemeSelector: React.FC<ThemeSelectorProps> = ({currentTheme, onThemeChange}) => {
+    const [indicatorStyle, setIndicatorStyle] = useState({});
+    const buttonRefs = useRef<(HTMLButtonElement | null)[]>([]);
+
+    useEffect(() => {
+        const activeIndex = themeOptions.findIndex(option => option.key === currentTheme);
+        const activeButtonNode = buttonRefs.current[activeIndex];
+        const padding = 8;
+
+        if (activeButtonNode) {
+            setIndicatorStyle({
+                width: `${activeButtonNode.offsetWidth}px`,
+                transform: `translateX(${activeButtonNode.offsetLeft - padding}px)`,
+            });
+        }
+    }, [currentTheme]);
+
     return (
         <SelectorWrapper>
-            {themeOptions.map((theme) => (
+            <ActiveIndicator style={indicatorStyle} />
+            {themeOptions.map((theme, index) => (
                 <ThemeButton
                     key={theme.key}
+                    ref={(el) => { buttonRefs.current[index] = el; }}
                     $isActive={currentTheme === theme.key}
                     onClick={() => onThemeChange(theme.key)}
                 >
