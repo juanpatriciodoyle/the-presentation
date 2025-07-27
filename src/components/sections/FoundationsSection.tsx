@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import {Circle} from 'lucide-react';
+import {Feather, Maximize, Palette, TabletSmartphone, Layers, AccessibilityIcon} from 'lucide-react';
 import Section from '../common/Section';
-import {Card} from '../common/Card';
-import {Description, HeaderContainer, Title} from '../common/Header';
+import { Card } from '../common/Card';
+import { Description, HeaderContainer, Title } from '../common/Header';
 
 const Quote = styled(Description)`
     font-style: italic;
@@ -22,15 +22,25 @@ const Grid = styled.div`
     }
 `;
 
+const PillarCard = styled(Card)`
+    padding: 32px;
+    position: relative;
+    overflow: hidden;
+`;
+
 const PillarTitle = styled.h3`
     font-size: 1.5rem;
     font-weight: 700;
     margin-bottom: 1rem;
+    position: relative;
+    z-index: 2;
 `;
 
 const PillarDescription = styled.p`
     color: ${(props) => props.theme.colors.description};
-    margin-bottom: 1rem;
+    margin-bottom: 2.5rem;
+    position: relative;
+    z-index: 2;
 `;
 
 const PillarList = styled.ul`
@@ -39,21 +49,49 @@ const PillarList = styled.ul`
     margin: 0;
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 2rem;
+    position: relative;
+    z-index: 2;
 `;
 
 const PillarListItem = styled.li`
     display: flex;
     align-items: flex-start;
-    gap: 0.75rem;
+    gap: 1rem;
     line-height: 1.6;
 
     svg {
         flex-shrink: 0;
         color: ${(props) => props.theme.colors.accent};
-        margin-top: 0.4rem;
+        margin-top: 0.2rem;
     }
 `;
+
+const ItemTitle = styled.h4`
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+`;
+
+const ItemDescription = styled.p`
+    font-size: 0.95rem;
+    color: ${(props) => props.theme.colors.description};
+    line-height: 1.5;
+`;
+
+const Anchor = styled.div`
+    position: absolute;
+    font-size: 38rem;
+    font-weight: 800;
+    color: ${(props) => props.theme.colors.accent};
+    opacity: 0.05;
+    z-index: 1;
+    user-select: none;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+`;
+
 
 const FoundationsSection: React.FC = () => {
     return (
@@ -66,44 +104,64 @@ const FoundationsSection: React.FC = () => {
                 </Quote>
             </HeaderContainer>
             <Grid>
-                <Card>
-                    <PillarTitle>Pillar 1: Timeless Elegance</PillarTitle>
+                <PillarCard>
+                    <Anchor>1</Anchor>
+                    <PillarTitle>Timeless Elegance</PillarTitle>
                     <PillarDescription>Enduring rules of simplicity and clarity that form the bedrock of good
                         design.</PillarDescription>
                     <PillarList>
                         <PillarListItem>
-                            <Circle size={12} strokeWidth={3}/>
-                            <span><strong>Elegant Simplicity (KISS):</strong> Eliminate irrelevant information to reduce cognitive load.</span>
+                            <Feather size={24} />
+                            <div>
+                                <ItemTitle>Elegant Simplicity (KISS)</ItemTitle>
+                                <ItemDescription>Eliminate irrelevant information to reduce cognitive load.</ItemDescription>
+                            </div>
                         </PillarListItem>
                         <PillarListItem>
-                            <Circle size={12} strokeWidth={3}/>
-                            <span><strong>Mastery of White Space:</strong> Use negative space to create focus and guide the user.</span>
+                            <Maximize size={24} />
+                            <div>
+                                <ItemTitle>Mastery of White Space</ItemTitle>
+                                <ItemDescription>Use negative space to create focus and guide the user.</ItemDescription>
+                            </div>
                         </PillarListItem>
                         <PillarListItem>
-                            <Circle size={12} strokeWidth={3}/>
-                            <span><strong>Strict & Muted Visuals:</strong> A limited color palette and strong typography create a clean, professional interface.</span>
+                            <Palette size={24} />
+                            <div>
+                                <ItemTitle>Strict & Muted Visuals</ItemTitle>
+                                <ItemDescription>A limited color palette and strong typography create a clean, professional interface.</ItemDescription>
+                            </div>
                         </PillarListItem>
                     </PillarList>
-                </Card>
-                <Card>
-                    <PillarTitle>Pillar 2: The Modern Standard</PillarTitle>
+                </PillarCard>
+                <PillarCard>
+                    <Anchor>2</Anchor>
+                    <PillarTitle>The Modern Standard</PillarTitle>
                     <PillarDescription>Essential practices that address the complexities of today's multi-device
                         world.</PillarDescription>
                     <PillarList>
                         <PillarListItem>
-                            <Circle size={12} strokeWidth={3}/>
-                            <span><strong>Accessibility by Default:</strong> Design for everyone. Meeting WCAG AA is the minimum.</span>
+                            <AccessibilityIcon size={24} />
+                            <div>
+                                <ItemTitle>Accessibility by Default</ItemTitle>
+                                <ItemDescription>Design for everyone. Meeting WCAG AA is the minimum.</ItemDescription>
+                            </div>
                         </PillarListItem>
                         <PillarListItem>
-                            <Circle size={12} strokeWidth={3}/>
-                            <span><strong>Responsive & Mobile-First:</strong> Layouts must adapt seamlessly to any screen size.</span>
+                            <TabletSmartphone size={24} />
+                            <div>
+                                <ItemTitle>Responsive & Mobile-First</ItemTitle>
+                                <ItemDescription>Layouts must adapt seamlessly to any screen size.</ItemDescription>
+                            </div>
                         </PillarListItem>
                         <PillarListItem>
-                            <Circle size={12} strokeWidth={3}/>
-                            <span><strong>Clear Visual Hierarchy:</strong> Intentionally guide the user's eye to the most important elements.</span>
+                            <Layers size={24} />
+                            <div>
+                                <ItemTitle>Clear Visual Hierarchy</ItemTitle>
+                                <ItemDescription>Intentionally guide the user's eye to the most important elements.</ItemDescription>
+                            </div>
                         </PillarListItem>
                     </PillarList>
-                </Card>
+                </PillarCard>
             </Grid>
         </Section>
     );
