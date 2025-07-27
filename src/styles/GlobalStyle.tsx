@@ -31,6 +31,10 @@ export const GlobalStyle = createGlobalStyle`
         transition: background-color 0.5s ease;
 
         ${(props) => props.theme.blur && `
+            background-image: url('/background.jpg');
+            background-size: cover;
+            background-position: center;
+            
             position: relative;
             overflow-x: hidden;
             
