@@ -39,6 +39,7 @@ const StepContent = styled.div`
 const StepTitle = styled.h3`
     font-size: 1.25rem;
     font-weight: 700;
+    margin-bottom: 8px;
 `;
 
 const StepDescription = styled.p`

@@ -31,6 +31,12 @@ const StrategySelectorCard = styled(Card)<{ $isActive: boolean }>`
     padding: 1.5rem;
 `;
 
+const SwitchCardTitle = styled.h3`
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+`;
+
 const ContentDisplay = styled(Card)`
     position: relative;
 `;
@@ -116,14 +122,14 @@ const StrategiesSection: React.FC = () => {
                         $isActive={activeStrategy === 'minimalist'}
                         onClick={() => handleSelectStrategy('minimalist')}
                     >
-                        <h3>The Hyper-Efficient & Minimalist Interface</h3>
+                        <SwitchCardTitle>The Hyper-Efficient & Minimalist Interface</SwitchCardTitle>
                         <p>A frictionless, task-oriented user journey focused on speed and clarity.</p>
                     </StrategySelectorCard>
                     <StrategySelectorCard
                         $isActive={activeStrategy === 'immersive'}
                         onClick={() => handleSelectStrategy('immersive')}
                     >
-                        <h3>The Emotionally Intelligent & Immersive Experience</h3>
+                        <SwitchCardTitle>The Emotionally Intelligent & Immersive Experience</SwitchCardTitle>
                         <p>An engaging, memorable, and brand-building interaction.</p>
                     </StrategySelectorCard>
                 </SelectorContainer>
