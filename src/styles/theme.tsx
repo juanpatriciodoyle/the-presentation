@@ -40,14 +40,14 @@ export const darkTheme: Theme = {
 
 export const liquidGlassTheme: Theme = {
     colors: {
-        background: '#F8F5F2',
-        text: '#4A4A4A',
-        secondaryText: '#4B4B4B',
-        accent: '#4A90E2',
-        description: '#4e535d',
-        secondaryBg: 'rgba(255, 255, 255, 0)',
-        cardBorder: 'rgba(255, 255, 255, 0.3)',
+        background: '#e0e5ec',
+        text: '#313a48',
+        secondaryText: '#3b4556',
+        accent: '#0059B2',
+        description: '#3b4556',
+        secondaryBg: 'rgba(255, 255, 255, 0.45)',
+        cardBorder: 'rgba(255, 255, 255, 0.7)',
         cardShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.1)',
     },
-    blur: '8px',
+    blur: '12px',
 };
