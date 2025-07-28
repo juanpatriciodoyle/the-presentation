@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import {createGlobalStyle} from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
@@ -10,15 +10,27 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     @keyframes move-blob-1 {
-        0% { transform: translate(0, 0); }
-        50% { transform: translate(100px, 50px); }
-        100% { transform: translate(0, 0); }
+        0% {
+            transform: translate(0, 0);
+        }
+        50% {
+            transform: translate(100px, 50px);
+        }
+        100% {
+            transform: translate(0, 0);
+        }
     }
 
     @keyframes move-blob-2 {
-        0% { transform: translate(0, 0); }
-        50% { transform: translate(-80px, -40px); }
-        100% { transform: translate(0, 0); }
+        0% {
+            transform: translate(0, 0);
+        }
+        50% {
+            transform: translate(-80px, -40px);
+        }
+        100% {
+            transform: translate(0, 0);
+        }
     }
 
     body {
@@ -31,7 +43,7 @@ export const GlobalStyle = createGlobalStyle`
         transition: background-color 0.5s ease;
 
         ${(props) => props.theme.blur && `
-            background-image: url('/background.jpg');
+            background-image: url('${process.env.PUBLIC_URL}/background.jpg');
             background-size: cover;
             background-position: center;
             

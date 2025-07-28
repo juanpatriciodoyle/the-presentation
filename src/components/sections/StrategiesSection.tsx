@@ -156,8 +156,8 @@ const StrategiesSection: React.FC = () => {
                 <StickyPanel>
                     <AnimatedContentWrapper style={{scale, y}}>
                         <VisualContainer>
-                            <VisualOne src="/revolut.png" style={{opacity: opacityFirst}}/>
-                            <VisualTwo src="/airbnb.png" style={{opacity: opacitySecond}}/>
+                            <VisualOne src={`${process.env.PUBLIC_URL}/revolut.png`} style={{opacity: opacityFirst}}/>
+                            <VisualTwo src={`${process.env.PUBLIC_URL}/airbnb.png`} style={{opacity: opacitySecond}}/>
                         </VisualContainer>
                         <TextContainer>
                             <StrategyContent style={{opacity: opacityFirst}}>
