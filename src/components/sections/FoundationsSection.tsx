@@ -113,7 +113,7 @@ const FoundationsSection: React.FC = () => {
                         <PillarListItem>
                             <Feather size={24} />
                             <div>
-                                <ItemTitle>Elegant Simplicity (KISS)</ItemTitle>
+                                <ItemTitle>Keep it Simple Stupid (US Navy)</ItemTitle>
                                 <ItemDescription>Eliminate irrelevant information to reduce cognitive load.</ItemDescription>
                             </div>
                         </PillarListItem>
