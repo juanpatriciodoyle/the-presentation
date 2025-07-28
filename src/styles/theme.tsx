@@ -49,5 +49,5 @@ export const liquidGlassTheme: Theme = {
         cardBorder: 'rgba(255, 255, 255, 0.7)',
         cardShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.1)',
     },
-    blur: '12px',
+    blur: '1px',
 };
