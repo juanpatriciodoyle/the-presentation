@@ -1,167 +1,185 @@
-import React, {useState} from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { strategyData } from '../../data/strategyData';
+import { Description, HeaderContainer, Title } from '../common/Header';
 import Section from '../common/Section';
-import {Card} from '../common/Card';
-import {Strategy, strategyData} from '../../data/strategyData';
-import {Description, HeaderContainer, Title} from '../common/Header';
 
-const StrategyGrid = styled.div`
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 2rem;
-    align-items: start;
-
-    @media (max-width: 1024px) {
-        grid-template-columns: 1fr;
-    }
+const StrategiesSectionWrapper = styled(Section)`
+    padding-top: 2rem;
+    padding-bottom: 5rem;
 `;
 
-const SelectorContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+const StrategiesHeader = styled(HeaderContainer)`
+    margin-bottom: 2rem;
 `;
 
-const StrategySelectorCard = styled(Card)<{ $isActive: boolean }>`
-    cursor: pointer;
-    border: 2px solid ${(props) => (props.$isActive ? props.theme.colors.accent : 'transparent')};
-    transform: ${(props) => (props.$isActive ? 'translateY(-5px)' : 'none')};
-    box-shadow: ${(props) => (props.$isActive ? props.theme.colors.cardShadow : '0 4px 6px -1px rgba(0, 0, 0, 0.1)')};
-    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-    padding: 1.5rem;
-`;
-
-const SwitchCardTitle = styled.h3`
-    font-size: 1.25rem;
-    font-weight: 700;
-    margin-bottom: 8px;
-`;
-
-const ContentDisplay = styled(Card)`
+const PinContainer = styled.div`
+    height: 180vh;
+    width: 100%;
     position: relative;
 `;
 
-const AppsTitle = styled.div<{ $isVisible: boolean }>`
-    transition: opacity 0.4s ease-in-out;
-    opacity: ${(props) => (props.$isVisible ? 1 : 0)};
-    color: ${(props) => props.theme.colors.secondaryText};
-    font-weight: bold;
-`
+const StickyPanel = styled.div`
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;
 
-const AppDescription = styled.div<{ $isVisible: boolean }>`
-    transition: opacity 0.4s ease-in-out;
-    opacity: ${(props) => (props.$isVisible ? 1 : 0)};
-    color: ${(props) => props.theme.colors.secondaryText};
-`
+const AnimatedContentWrapper = styled(motion.div)`
+    display: grid;
+    width: 100%;
+    max-width: 80rem;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 2rem;
+    padding: 2rem;
 
-const ContentInner = styled.div<{ $isVisible: boolean }>`
-    transition: opacity 0.4s ease-in-out;
-    opacity: ${(props) => (props.$isVisible ? 1 : 0)};
-
-    h3 {
-        font-size: 1.5rem;
-        font-weight: 700;
-        margin-bottom: 0.5rem;
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+        padding: 4rem 2rem;
     }
+`;
 
-    h4 {
-        font-weight: 600;
-        font-size: 1.125rem;
-        margin-bottom: 0.5rem;
-    }
+const TextContainer = styled(motion.div)`
+    max-width: 32rem;
+    margin: 0 auto;
+    display: grid;
 
-    p {
-        color: ${(props) => props.theme.colors.description};
-        line-height: 1.6;
+    @media (max-width: 768px) {
+        min-height: 50vh;
     }
+`;
 
-    > div {
-        margin-bottom: 1.5rem;
+const VisualContainer = styled(motion.div)`
+    width: 100%;
+    height: 450px;
+    position: relative;
+
+    @media (max-width: 768px) {
+        order: -1;
+        height: 300px;
     }
+`;
+
+const StrategyContent = styled(motion.div)`
+    grid-area: 1 / 1;
+`;
+
+const StrategyTitle = styled.h3`
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+`;
+
+const StrategyDescription = styled.p`
+    font-size: 1.125rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    color: ${(props) => props.theme.colors.description};
 `;
 
 const ExampleCard = styled.div`
-    background-color: #f9fafb;
-    padding: 0.75rem;
-    border-radius: 0.5rem;
-    margin-top: 0.75rem;
+    background-color: ${(props) => props.theme.colors.secondaryBg}80;
+    backdrop-filter: blur(10px);
+    padding: 1rem 1.5rem;
+    border-radius: 0.75rem;
+    margin-top: 1rem;
+    border: 1px solid ${(props) => props.theme.colors.cardBorder};
+`;
 
-    p:first-child {
-        font-weight: 600;
-    }
+const ExampleTitle = styled.p`
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+`;
 
-    p:last-child {
-        font-size: 0.875rem;
-    }
+const ExampleDesc = styled.p`
+    font-size: 0.9rem;
+    color: ${(props) => props.theme.colors.description};
+`;
+
+const VisualOne = styled(motion.img)`
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+`;
+
+const VisualTwo = styled(motion.img)`
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
 `;
 
 const StrategiesSection: React.FC = () => {
-    const [activeStrategy, setActiveStrategy] = useState<'minimalist' | 'immersive'>('minimalist');
-    const [content, setContent] = useState<Strategy | null>(strategyData.minimalist);
-    const [isContentVisible, setIsContentVisible] = useState(true);
+    const minimalist = strategyData.minimalist;
+    const immersive = strategyData.immersive;
 
-    const handleSelectStrategy = (key: 'minimalist' | 'immersive') => {
-        setIsContentVisible(false);
-        setTimeout(() => {
-            setActiveStrategy(key);
-            setContent(strategyData[key]);
-            setIsContentVisible(true);
-        }, 400);
-    };
+    const targetRef = useRef<HTMLDivElement | null>(null);
+    const { scrollYProgress } = useScroll({
+        target: targetRef,
+        offset: ['start start', 'end end'],
+    });
+
+    const scale = useTransform(scrollYProgress, [0, 0.2], [0.85, 1]);
+    const y = useTransform(scrollYProgress, [0, 0.2], ['-20vh', '0vh']);
+
+    const opacityFirst = useTransform(scrollYProgress, [0.25, 0.5], [1, 0]);
+    const opacitySecond = useTransform(scrollYProgress, [0.55, 0.8], [0, 1]);
 
     return (
-        <Section id="strategies">
-            <HeaderContainer>
+        <StrategiesSectionWrapper id="strategies">
+            <StrategiesHeader>
                 <Title>Our Two Strategic Directions</Title>
-                <Description>Based on our principles, we can pursue two distinct and powerful UI strategies. Click to
+                <Description>Based on our principles, we can pursue two distinct and powerful UI strategies. Scroll to
                     explore each approach.</Description>
-            </HeaderContainer>
-            <StrategyGrid>
-                <SelectorContainer>
-                    <StrategySelectorCard
-                        $isActive={activeStrategy === 'minimalist'}
-                        onClick={() => handleSelectStrategy('minimalist')}
-                    >
-                        <SwitchCardTitle>The Hyper-Efficient & Minimalist Interface</SwitchCardTitle>
-                        <p>A frictionless, task-oriented user journey focused on speed and clarity.</p>
-                    </StrategySelectorCard>
-                    <StrategySelectorCard
-                        $isActive={activeStrategy === 'immersive'}
-                        onClick={() => handleSelectStrategy('immersive')}
-                    >
-                        <SwitchCardTitle>The Emotionally Intelligent & Immersive Experience</SwitchCardTitle>
-                        <p>An engaging, memorable, and brand-building interaction.</p>
-                    </StrategySelectorCard>
-                </SelectorContainer>
-                <ContentDisplay>
-                    {content && (
-                        <ContentInner $isVisible={isContentVisible}>
-                            <div>
-                                <h3>{content.title}</h3>
-                                <p>{content.description}</p>
-                            </div>
-                            <div>
-                                <h4>Why It Works</h4>
-                                <p>{content.why}</p>
-                            </div>
-                            <div>
-                                <h4>The Holy Trinity of Visuals</h4>
-                                <p dangerouslySetInnerHTML={{__html: content.trinity}}/>
-                            </div>
-                            <div>
+            </StrategiesHeader>
+
+            <PinContainer ref={targetRef}>
+                <StickyPanel>
+                    <AnimatedContentWrapper style={{ scale, y }}>
+                        <VisualContainer>
+                            <VisualOne src="/revolut.png" style={{ opacity: opacityFirst }} />
+                            <VisualTwo src="/airbnb.png" style={{ opacity: opacitySecond }} />
+                        </VisualContainer>
+                        <TextContainer>
+                            <StrategyContent style={{ opacity: opacityFirst }}>
+                                <StrategyTitle>{minimalist.title}</StrategyTitle>
+                                <StrategyDescription>{minimalist.why}</StrategyDescription>
                                 <h4>Examples</h4>
-                                {content.examples.map((ex) => (
+                                {minimalist.examples.map(ex => (
                                     <ExampleCard key={ex.name}>
-                                        <AppsTitle $isVisible={isContentVisible}>{ex.name}</AppsTitle>
-                                        <AppDescription $isVisible={isContentVisible}>{ex.desc}</AppDescription>
+                                        <ExampleTitle>{ex.name}</ExampleTitle>
+                                        <ExampleDesc>{ex.desc}</ExampleDesc>
                                     </ExampleCard>
                                 ))}
-                            </div>
-                        </ContentInner>
-                    )}
-                </ContentDisplay>
-            </StrategyGrid>
-        </Section>
+                            </StrategyContent>
+                            <StrategyContent style={{ opacity: opacitySecond }}>
+                                <StrategyTitle>{immersive.title}</StrategyTitle>
+                                <StrategyDescription>{immersive.why}</StrategyDescription>
+                                <h4>Examples</h4>
+                                {immersive.examples.map(ex => (
+                                    <ExampleCard key={ex.name}>
+                                        <ExampleTitle>{ex.name}</ExampleTitle>
+                                        <ExampleDesc>{ex.desc}</ExampleDesc>
+                                    </ExampleCard>
+                                ))}
+                            </StrategyContent>
+                        </TextContainer>
+                    </AnimatedContentWrapper>
+                </StickyPanel>
+            </PinContainer>
+        </StrategiesSectionWrapper>
     );
 };
 

@@ -54,7 +54,7 @@ const ActionableStepsSection: React.FC = () => {
     return (
         <Section id="actions">
             <HeaderContainer>
-                <Title>Actionable Next Steps</Title>
+                <Title>Next Steps</Title>
                 <Description>How we can begin to lead this initiative.</Description>
             </HeaderContainer>
             <StepsContainer>
