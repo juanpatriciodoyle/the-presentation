@@ -1,13 +1,12 @@
-import React, { useRef } from 'react';
+import React, {useRef} from 'react';
 import styled from 'styled-components';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { strategyData } from '../../data/strategyData';
-import { Description, HeaderContainer, Title } from '../common/Header';
+import {motion, useScroll, useTransform} from 'framer-motion';
+import {strategyData} from '../../data/strategyData';
+import {Description, HeaderContainer, Title} from '../common/Header';
 import Section from '../common/Section';
 
 const StrategiesSectionWrapper = styled(Section)`
-    padding-top: 2rem;
-    padding-bottom: 5rem;
+    padding: 0;
 `;
 
 const StrategiesHeader = styled(HeaderContainer)`
@@ -60,8 +59,8 @@ const TextContainer = styled(motion.div)`
     `};
 
     @media (max-width: 768px) {
-    min-height: 50vh;
-}
+        min-height: 50vh;
+    }
 `;
 
 const VisualContainer = styled(motion.div)`
@@ -134,7 +133,7 @@ const StrategiesSection: React.FC = () => {
     const immersive = strategyData.immersive;
 
     const targetRef = useRef<HTMLDivElement | null>(null);
-    const { scrollYProgress } = useScroll({
+    const {scrollYProgress} = useScroll({
         target: targetRef,
         offset: ['start start', 'end end'],
     });
@@ -146,7 +145,7 @@ const StrategiesSection: React.FC = () => {
     const opacitySecond = useTransform(scrollYProgress, [0.65, 0.9], [0, 1]);
 
     return (
-        <StrategiesSectionWrapper id="strategies">
+        <StrategiesSectionWrapper id="strategies" paddingBottom={"0"}>
             <StrategiesHeader>
                 <Title>Our Two Strategic Directions</Title>
                 <Description>Based on our principles, we can pursue two distinct and powerful UI strategies. Scroll to
@@ -155,13 +154,13 @@ const StrategiesSection: React.FC = () => {
 
             <PinContainer ref={targetRef}>
                 <StickyPanel>
-                    <AnimatedContentWrapper style={{ scale, y }}>
+                    <AnimatedContentWrapper style={{scale, y}}>
                         <VisualContainer>
-                            <VisualOne src="/revolut.png" style={{ opacity: opacityFirst }} />
-                            <VisualTwo src="/airbnb.png" style={{ opacity: opacitySecond }} />
+                            <VisualOne src="/revolut.png" style={{opacity: opacityFirst}}/>
+                            <VisualTwo src="/airbnb.png" style={{opacity: opacitySecond}}/>
                         </VisualContainer>
                         <TextContainer>
-                            <StrategyContent style={{ opacity: opacityFirst }}>
+                            <StrategyContent style={{opacity: opacityFirst}}>
                                 <StrategyTitle>{minimalist.title}</StrategyTitle>
                                 <StrategyDescription>{minimalist.why}</StrategyDescription>
                                 <h3>Examples</h3>
@@ -172,7 +171,7 @@ const StrategiesSection: React.FC = () => {
                                     </ExampleCard>
                                 ))}
                             </StrategyContent>
-                            <StrategyContent style={{ opacity: opacitySecond }}>
+                            <StrategyContent style={{opacity: opacitySecond}}>
                                 <StrategyTitle>{immersive.title}</StrategyTitle>
                                 <StrategyDescription>{immersive.why}</StrategyDescription>
                                 <h3>Examples</h3>

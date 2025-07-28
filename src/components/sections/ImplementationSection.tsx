@@ -37,7 +37,7 @@ const PathDescription = styled.p`
 
 const ImplementationSection: React.FC = () => {
     return (
-        <Section id="implementation">
+        <Section id="implementation" paddingTop={"0"}>
             <HeaderContainer>
                 <Title>The Path Forward</Title>
                 <Description>How we can apply these concepts across our platforms.</Description>
