@@ -42,7 +42,7 @@ const HeroSection: React.FC = () => {
                     <AccentText>User Interface Design</AccentText>
                 </Title>
                 <Subtitle>
-                    It's time to stop reusing old patterns. This is our strategy for building modern, effective, and
+                    It's time to stop reusing old patterns. An strategy to build modern, effective, and
                     engaging digital experiences.
                 </Subtitle>
             </HeroContainer>

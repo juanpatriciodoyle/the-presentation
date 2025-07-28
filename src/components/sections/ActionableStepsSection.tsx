@@ -103,7 +103,7 @@ const ActionableStepsSection: React.FC = () => {
     useEffect(() => {
         if (isFlipped) {
             setShowConfetti(true);
-            const timer = setTimeout(() => setShowConfetti(false), 5000);
+            const timer = setTimeout(() => setShowConfetti(false), 6000);
             return () => clearTimeout(timer);
         }
     }, [isFlipped]);

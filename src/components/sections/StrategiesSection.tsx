@@ -5,10 +5,6 @@ import {strategyData} from '../../data/strategyData';
 import {Description, HeaderContainer, Title} from '../common/Header';
 import Section from '../common/Section';
 
-const StrategiesSectionWrapper = styled(Section)`
-    padding: 0;
-`;
-
 const StrategiesHeader = styled(HeaderContainer)`
     margin-bottom: 2rem;
 `;
@@ -145,7 +141,7 @@ const StrategiesSection: React.FC = () => {
     const opacitySecond = useTransform(scrollYProgress, [0.65, 0.9], [0, 1]);
 
     return (
-        <StrategiesSectionWrapper id="strategies" paddingBottom={"0"}>
+        <Section id="strategies" paddingBottom={"0"}>
             <StrategiesHeader>
                 <Title>Our Two Strategic Directions</Title>
                 <Description>Based on our principles, we can pursue two distinct and powerful UI strategies. Scroll to
@@ -186,7 +182,7 @@ const StrategiesSection: React.FC = () => {
                     </AnimatedContentWrapper>
                 </StickyPanel>
             </PinContainer>
-        </StrategiesSectionWrapper>
+        </Section>
     );
 };
 

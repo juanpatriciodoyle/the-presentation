@@ -137,7 +137,7 @@ const FoundationsSection: React.FC = () => {
                     <Anchor>2</Anchor>
                     <PillarTitle>The Modern Standard</PillarTitle>
                     <PillarDescription>Essential practices that address the complexities of today's multi-device
-                        world.</PillarDescription>
+                        world. </PillarDescription>
                     <PillarList>
                         <PillarListItem>
                             <AccessibilityIcon size={24} />
@@ -150,7 +150,7 @@ const FoundationsSection: React.FC = () => {
                             <TabletSmartphone size={24} />
                             <div>
                                 <ItemTitle>Responsive & Mobile-First</ItemTitle>
-                                <ItemDescription>Layouts must adapt seamlessly to any screen size.</ItemDescription>
+                                <ItemDescription>Device adaptation without losing context or usability.</ItemDescription>
                             </div>
                         </PillarListItem>
                         <PillarListItem>
