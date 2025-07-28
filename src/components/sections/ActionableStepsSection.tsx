@@ -1,6 +1,7 @@
-import React, { useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
+import Confetti from 'react-confetti';
 import { Card } from '../common/Card';
 import Tag from '../common/Tag';
 import { Description, HeaderContainer, Title } from '../common/Header';
@@ -31,9 +32,7 @@ const CardFace = styled(motion.div)`
     backface-visibility: hidden;
 `;
 
-const CardFront = styled(CardFace)`
-    /* The Card component will provide the background and styling */
-`;
+const CardFront = styled(CardFace)``;
 
 const CardBack = styled(CardFace)`
     transform: rotateY(180deg);
@@ -48,6 +47,10 @@ const CardBackContent = styled(Card)`
     font-size: 2.5rem;
     font-weight: 700;
     text-align: center;
+`;
+
+const AccentText = styled.span`
+    color: ${(props) => props.theme.colors.accent};
 `;
 
 const StepsList = styled.ul`
@@ -85,15 +88,25 @@ const TagContainer = styled.div`
 `;
 
 const ActionableStepsSection: React.FC = () => {
+    const [isFlipped, setIsFlipped] = useState(false);
+    const [showConfetti, setShowConfetti] = useState(false);
     const targetRef = useRef<HTMLDivElement | null>(null);
+
     const { scrollYProgress } = useScroll({
         target: targetRef,
         offset: ['start end', 'end start']
     });
 
-    const rotateX = useTransform(scrollYProgress, [0.1, 0.3], [60, 0]);
-    const rotateY = useTransform(scrollYProgress, [0.4, 0.6], [0, 180]);
-    const scale = useTransform(scrollYProgress, [0, 0.2], [0.7, 1]);
+    const scale = useTransform(scrollYProgress, [0, 0.25], [0.7, 1]);
+    const rotateX = useTransform(scrollYProgress, [0.1, 0.4], [60, 0]);
+
+    useEffect(() => {
+        if (isFlipped) {
+            setShowConfetti(true);
+            const timer = setTimeout(() => setShowConfetti(false), 5000);
+            return () => clearTimeout(timer);
+        }
+    }, [isFlipped]);
 
     return (
         <Section id="actions">
@@ -101,15 +114,32 @@ const ActionableStepsSection: React.FC = () => {
                 <Title>Next Steps</Title>
                 <Description>How we can begin to lead this initiative.</Description>
             </HeaderContainer>
-            <AnimationContainer ref={targetRef}>
-                <FlippingCard style={{ rotateX, rotateY, scale }}>
+            <AnimationContainer
+                ref={targetRef}
+                onMouseEnter={() => setIsFlipped(true)}
+                onMouseLeave={() => setIsFlipped(false)}
+            >
+                <AnimatePresence>
+                    {showConfetti && (
+                        <Confetti
+                            recycle={false}
+                            numberOfPieces={300}
+                            style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%' }}
+                        />
+                    )}
+                </AnimatePresence>
+                <FlippingCard
+                    style={{ rotateX, scale }}
+                    animate={{ rotateY: isFlipped ? 180 : 0 }}
+                    transition={{ duration: 0.7, ease: 'easeInOut' }}
+                >
                     <CardFront as={Card}>
                         <StepsList>
                             <StepItem>
                                 <StepContent>
                                     <StepTitle>Flip-UP our apps</StepTitle>
-                                    <StepDescription>Showcase how our apps can be visually and functionally improved from a
-                                        design perspective.</StepDescription>
+                                    <StepDescription>Showcase how our apps can be visually and functionally improved
+                                        from a design perspective.</StepDescription>
                                 </StepContent>
                                 <TagContainer>
                                     <Tag effort="Low"/>
@@ -128,7 +158,8 @@ const ActionableStepsSection: React.FC = () => {
                             <StepItem>
                                 <StepContent>
                                     <StepTitle>Provide Visual Prototypes</StepTitle>
-                                    <StepDescription>Create tangible, high-fidelity prototypes to establish a clear visual
+                                    <StepDescription>Create tangible, high-fidelity prototypes to establish a clear
+                                        visual
                                         standard.</StepDescription>
                                 </StepContent>
                                 <TagContainer>
@@ -138,7 +169,11 @@ const ActionableStepsSection: React.FC = () => {
                         </StepsList>
                     </CardFront>
                     <CardBack>
-                        <CardBackContent>Let's tackle the UX challenges!</CardBackContent>
+                        <CardBackContent>
+                            Let's tackle the
+                            <AccentText>&nbsp;UX&nbsp;</AccentText>
+                            challenges!
+                        </CardBackContent>
                     </CardBack>
                 </FlippingCard>
             </AnimationContainer>
