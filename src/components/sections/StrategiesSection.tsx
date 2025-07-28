@@ -107,7 +107,7 @@ const ExampleTitle = styled.p`
 `;
 
 const ExampleDesc = styled.p`
-    font-size: 0.9rem;
+    font-size: 1rem;
     color: ${(props) => props.theme.colors.description};
 `;
 
@@ -164,7 +164,7 @@ const StrategiesSection: React.FC = () => {
                             <StrategyContent style={{ opacity: opacityFirst }}>
                                 <StrategyTitle>{minimalist.title}</StrategyTitle>
                                 <StrategyDescription>{minimalist.why}</StrategyDescription>
-                                <h4>Examples</h4>
+                                <h3>Examples</h3>
                                 {minimalist.examples.map(ex => (
                                     <ExampleCard key={ex.name}>
                                         <ExampleTitle>{ex.name}</ExampleTitle>
@@ -175,7 +175,7 @@ const StrategiesSection: React.FC = () => {
                             <StrategyContent style={{ opacity: opacitySecond }}>
                                 <StrategyTitle>{immersive.title}</StrategyTitle>
                                 <StrategyDescription>{immersive.why}</StrategyDescription>
-                                <h4>Examples</h4>
+                                <h3>Examples</h3>
                                 {immersive.examples.map(ex => (
                                     <ExampleCard key={ex.name}>
                                         <ExampleTitle>{ex.name}</ExampleTitle>
