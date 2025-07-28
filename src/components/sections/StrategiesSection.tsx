@@ -38,7 +38,6 @@ const AnimatedContentWrapper = styled(motion.div)`
     grid-template-columns: 1fr 1fr;
     align-items: center;
     gap: 2rem;
-    padding: 2rem;
 
     @media (max-width: 768px) {
         grid-template-columns: 1fr;
@@ -47,13 +46,22 @@ const AnimatedContentWrapper = styled(motion.div)`
 `;
 
 const TextContainer = styled(motion.div)`
-    max-width: 32rem;
+    max-width: 36rem;
     margin: 0 auto;
     display: grid;
 
+    ${(props) => props.theme.blur && `
+        background-color: ${props.theme.colors.secondaryBg};
+        backdrop-filter: blur(12px);
+        padding: 2.5rem;
+        border-radius: 1rem;
+        border: 1px solid ${props.theme.colors.cardBorder};
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+    `};
+
     @media (max-width: 768px) {
-        min-height: 50vh;
-    }
+    min-height: 50vh;
+}
 `;
 
 const VisualContainer = styled(motion.div)`
@@ -134,8 +142,8 @@ const StrategiesSection: React.FC = () => {
     const scale = useTransform(scrollYProgress, [0, 0.2], [0.85, 1]);
     const y = useTransform(scrollYProgress, [0, 0.2], ['-20vh', '0vh']);
 
-    const opacityFirst = useTransform(scrollYProgress, [0.25, 0.5], [1, 0]);
-    const opacitySecond = useTransform(scrollYProgress, [0.55, 0.8], [0, 1]);
+    const opacityFirst = useTransform(scrollYProgress, [0.35, 0.6], [1, 0]);
+    const opacitySecond = useTransform(scrollYProgress, [0.65, 0.9], [0, 1]);
 
     return (
         <StrategiesSectionWrapper id="strategies">
