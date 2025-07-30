@@ -27,8 +27,5 @@ export const Card = styled.div`
         opacity: 0;
       }
 
-      &:hover::before {
-        opacity: 1;
-      }
     `}
 `;
